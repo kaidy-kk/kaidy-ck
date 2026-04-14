@@ -1626,11 +1626,10 @@ function renderBookList(books) {
     container.innerHTML = books.map((book, index) => `
         <div class="book-card" onclick="openDetail(${book.id})" style="animation-delay: ${index * 0.05}s">
             <div class="book-cover-wrap">
-                <div class="book-cover" style="background: ${book.gradient}">
+                <div class="book-cover" style="${book.coverUrl ? `background-image:url(${book.coverUrl});background-size:cover;background-position:center;` : `background:${book.gradient}`}">${!book.coverUrl ? `
                     <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;width:80%;">
                         <div style="font-size:14px;font-weight:600;color:rgba(255,255,255,0.95);text-shadow:0 1px 3px rgba(0,0,0,0.3);line-height:1.4;">${book.title}</div>
-                    </div>
-                </div>
+                    </div>` : ''}</div>
                 <span class="book-badge">${book.badge}</span>
             </div>
             <div class="book-info">
@@ -1652,11 +1651,10 @@ function openDetail(id) {
     document.getElementById('modalBody').innerHTML = `
         <div class="detail-header">
             <div class="detail-cover-wrap">
-                <div class="detail-cover" style="background: ${book.gradient}; display:flex; align-items:center; justify-content:center;">
+                <div class="detail-cover" style="${book.coverUrl ? `background-image:url(${book.coverUrl});background-size:cover;background-position:center;` : `background:${book.gradient}`}">${!book.coverUrl ? `
                     <div style="text-align:center; padding:20px;">
                         <div style="font-size:16px;font-weight:600;color:rgba(255,255,255,0.95);text-shadow:0 1px 3px rgba(0,0,0,0.3);line-height:1.5;">${book.title}</div>
-                    </div>
-                </div>
+                    </div>` : ''}</div>
             </div>
             <div class="detail-info">
                 <div class="detail-title">${book.title}</div>
