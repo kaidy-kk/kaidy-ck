@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>箜箜绘本推荐 | 专业儿童阅读指导</title>
+    <style>
+/* ============================================
+   绘本推荐程序 - 渐变占位版
+   ============================================ */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600&family=ZCOOL+XiaoWei&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #8fa4b2;
+    --primary-light: #b5c6d1;
+    --primary-dark: #7a919e;
+    --primary-gradient: linear-gradient(135deg, #a8bcc9 0%, #8fa4b2 50%, #7a919e 100%);
+    --accent: #d4a5a5;
+    --accent-light: #e8cfcf;
+    --accent-gradient: linear-gradient(135deg, #e8cfcf 0%, #d4a5a5 100%);
+    --mint: #a8c4b8;
+    --mint-light: #d1e5dc;
+    --mint-gradient: linear-gradient(135deg, #d1e5dc 0%, #a8c4b8 100%);
+    --bg: #faf8f5;
+    --bg-warm: #f7f4ef;
+    --bg-gradient: linear-gradient(180deg, #fdfcfa 0%, #faf8f5 30%, #f7f4ef 100%);
+    --card: #ffffff;
+    --text: #4a5568;
+    --text-light: #718096;
+    --text-muted: #a0aec0;
+    --border: #ebe8e4;
+    --shadow-sm: 0 2px 8px rgba(143, 164, 178, 0.08);
+    --shadow-md: 0 4px 20px rgba(143, 164, 178, 0.12);
+    --shadow-lg: 0 8px 40px rgba(143, 164, 178, 0.18);
+    --shadow-card: 0 4px 24px rgba(143, 164, 178, 0.1), 0 1px 3px rgba(0,0,0,0.05);
+    --shadow-card-hover: 0 12px 48px rgba(143, 164, 178, 0.2), 0 4px 12px rgba(0,0,0,0.08);
+    --gold: #e8d4a8;
+    --cream: #faf6f0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes floatUp {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes modalSlideUp {
+    from { opacity: 0; transform: translateY(40px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ============================================
+   SVG装饰元素
+   ============================================ */
+.svg-decor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+}
+
+.decor-top-right { top: 60px; right: 20px; }
+.decor-bottom-left { bottom: 20px; left: 20px; }
+.decor-middle-right { top: 50%; right: 15px; transform: translateY(-50%); }
+
+/* ============================================
+   头部
+   ============================================ */
+.header {
+    background: url('https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/头图背景.png') center/cover no-repeat;
+    padding: 50px 20px 60px;
+    text-align: center;
+    color: #5a6570;
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.3) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.2) 0%, transparent 35%);
+    pointer-events: none;
+}
+
+.header h1 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+    color: #2d3748;
+    font-family: "ZCOOL XiaoWei", "Noto Serif SC", serif;
+    text-shadow: 0 2px 8px rgba(255,255,255,0.8), 0 1px 3px rgba(0,0,0,0.1);
+    animation: fadeInUp 0.8s ease;
+}
+
+.header h1 .icon {
+    display: inline-block;
+    margin-right: 8px;
+    animation: floatUp 3s ease-in-out infinite;
+}
+
+.subtitle {
+    font-size: 15px;
+    opacity: 0.85;
+    font-weight: 300;
+    letter-spacing: 1px;
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.header-stats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 35px;
+    animation: fadeInUp 0.8s ease 0.4s both;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 28px;
+    font-weight: 600;
+    color: #4a5560;
+    font-family: "ZCOOL XiaoWei", serif;
+}
+
+.stat-label {
+    font-size: 12px;
+    opacity: 0.7;
+    letter-spacing: 1px;
+}
+
+/* ============================================
+   主内容区
+   ============================================ */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* 搜索栏 */
+.search-section {
+    margin-bottom: 30px;
+    animation: fadeInUp 0.8s ease 0.6s both;
+}
+
+.search-box {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 50px;
+    padding: 6px;
+    box-shadow: var(--shadow-card);
+    border: 2px solid transparent;
+    transition: all 0.3s;
+}
+
+.search-box:focus-within {
+    border-color: var(--primary-light);
+    box-shadow: var(--shadow-card-hover);
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 14px 24px;
+    font-size: 15px;
+    color: var(--text);
+    background: transparent;
+    border-radius: 50px;
+}
+
+.search-box input::placeholder {
+    color: var(--text-muted);
+}
+
+.search-box button {
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.search-box button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(143, 164, 178, 0.4);
+}
+
+/* 筛选区域 */
+.filter-section {
+    background: white;
+    border-radius: 20px;
+    padding: 28px 32px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-sm);
+    animation: fadeInUp 0.8s ease 0.7s both;
+}
+
+.filter-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+}
+
+.filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tag {
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 13px;
+    color: var(--text-light);
+    background: var(--bg-warm);
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+}
+
+.tag:hover {
+    background: var(--primary-light);
+    color: white;
+}
+
+.tag.active {
+    background: var(--primary-gradient);
+    color: white;
+    box-shadow: 0 4px 12px rgba(143, 164, 178, 0.3);
+}
+
+/* 章节标题 */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    animation: fadeInUp 0.8s ease 0.8s both;
+}
+
+.section-title .icon {
+    width: 28px;
+    height: 28px;
+}
+
+/* ============================================
+   绘本列表
+   ============================================ */
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 28px;
+    animation: fadeIn 0.8s ease 0.9s both;
+}
+
+.book-card {
+    background: var(--card);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeInUp 0.6s ease both;
+    border: 1px solid var(--border);
+    position: relative;
+}
+
+.book-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--primary-gradient);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.book-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--primary-light);
+}
+
+.book-card:hover::before {
+    opacity: 1;
+}
+
+/* 封面区域 - 使用渐变色 */
+.book-cover-wrap {
+    position: relative;
+    padding-top: 130%;
+    overflow: hidden;
+}
+
+.book-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.book-card:hover .book-cover {
+    transform: scale(1.05);
+}
+
+/* 封面渐变叠加 */
+.book-cover-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to top, rgba(255,255,255,0.8), transparent);
+    pointer-events: none;
+}
+
+/* 标签 */
+.book-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--accent-gradient);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(212, 165, 165, 0.4);
+    z-index: 2;
+}
+
+.book-info {
+    padding: 18px;
+}
+
+.book-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+}
+
+.book-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.book-tag {
+    font-size: 11px;
+    color: var(--primary-dark);
+    background: linear-gradient(135deg, rgba(143, 164, 178, 0.1) 0%, rgba(143, 164, 178, 0.2) 100%);
+    padding: 4px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(143, 164, 178, 0.2);
+}
+
+.book-desc {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.7;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* 空状态 */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+}
+
+.empty-state .icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+/* ============================================
+   详情弹窗
+   ============================================ */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(74, 85, 104, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 40px 20px;
+}
+
+.modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 28px;
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    animation: modalSlideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+    overflow: hidden;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.modal-close:hover {
+    background: white;
+    transform: scale(1.1);
+}
+
+.detail-header {
+    display: flex;
+    gap: 28px;
+    padding: 32px;
+    background: linear-gradient(135deg, var(--bg-warm) 0%, #f0ede8 100%);
+}
+
+.detail-cover-wrap {
+    width: 160px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.detail-cover {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+}
+
+.detail-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.detail-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 10px;
+    font-family: "ZCOOL XiaoWei", serif;
+}
+
+.detail-author {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 16px;
+}
+
+.detail-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.detail-tag {
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 15px;
+    background: var(--primary-gradient);
+    color: white;
+}
+
+.detail-content {
+    padding: 32px;
+}
+
+.detail-section {
+    margin-bottom: 28px;
+}
+
+.detail-section:last-child {
+    margin-bottom: 0;
+}
+
+.detail-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 14px;
+}
+
+.detail-section p {
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--text-light);
+}
+
+.ability-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.ability-tag {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    background: linear-gradient(135deg, var(--mint-light) 0%, var(--mint) 100%);
+    color: #4a6a5a;
+}
+
+.pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.pros, .cons {
+    padding: 20px;
+    border-radius: 16px;
+}
+
+.pros {
+    background: linear-gradient(135deg, rgba(168, 196, 184, 0.15) 0%, rgba(168, 196, 184, 0.25) 100%);
+}
+
+.cons {
+    background: linear-gradient(135deg, rgba(212, 165, 165, 0.15) 0%, rgba(212, 165, 165, 0.25) 100%);
+}
+
+.pros h4, .cons h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.pros h4 { color: #5a8a6a; }
+.cons h4 { color: #b08888; }
+
+.pros ul, .cons ul {
+    list-style: none;
+}
+
+.pros li, .cons li {
+    font-size: 13px;
+    color: var(--text-light);
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.6;
+}
+
+.pros li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #5a8a6a;
+    font-weight: bold;
+}
+
+.cons li::before {
+    content: '!';
+    position: absolute;
+    left: 0;
+    color: #b08888;
+    font-weight: bold;
+}
+
+/* ============================================
+   响应式设计
+   ============================================ */
+@media (max-width: 768px) {
+    .header h1 { font-size: 24px; }
+    .header-stats { gap: 30px; }
+    .stat-number { font-size: 22px; }
+    .book-list { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+    .detail-header { flex-direction: column; align-items: center; text-align: center; }
+    .detail-cover-wrap { width: 140px; }
+    .detail-cover { height: 180px; }
+    .detail-title { font-size: 20px; }
+    .pros-cons { grid-template-columns: 1fr; }
+    .filter-section { padding: 20px; }
+    .tag { padding: 8px 14px; font-size: 12px; }
+    .svg-decor { display: none; }
+}
+
+@media (max-width: 480px) {
+    .header { padding: 40px 15px 50px; }
+    .container { padding: 30px 15px; }
+    .book-list { grid-template-columns: 1fr 1fr; gap: 16px; }
+    .book-info { padding: 14px; }
+    .book-title { font-size: 13px; }
+    .modal { padding: 20px 15px; }
+    .modal-content { border-radius: 20px; }
+    .detail-header, .detail-content { padding: 20px; }
+}
+</style>
+</head>
+<body>
+<!-- 右上角装饰：云朵和星星 -->
+<svg class="svg-decor decor-top-right" width="100" height="60" viewBox="0 0 100 60" fill="none">
+    <!-- 云朵 -->
+    <ellipse cx="30" cy="35" rx="20" ry="12" fill="#e8d4a8" opacity="0.5"/>
+    <ellipse cx="45" cy="30" rx="15" ry="10" fill="#f5f0ed" opacity="0.6"/>
+    <ellipse cx="60" cy="35" rx="18" ry="11" fill="#e8cfcf" opacity="0.4"/>
+    <!-- 星星1 -->
+    <path d="M30 20 L32 26 L38 26 L33 30 L35 36 L30 32 L25 36 L27 30 L22 26 L28 26 Z" fill="#e8d4a8" opacity="0.6">
+        <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <!-- 星星2 -->
+    <path d="M50 35 L51 38 L54 38 L52 40 L53 43 L50 41 L47 43 L48 40 L46 38 L49 38 Z" fill="#e8d4a8" opacity="0.5">
+        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+</svg>
+
+<!-- 左下角装饰：小兔子 -->
+<svg class="svg-decor decor-bottom-left" width="70" height="90" viewBox="0 0 70 90" fill="none">
+    <g opacity="0.45">
+        <ellipse cx="35" cy="65" rx="22" ry="20" fill="#e8cfcf"/>
+        <circle cx="35" cy="45" r="16" fill="#f5f0ed"/>
+        <ellipse cx="26" cy="18" rx="6" ry="16" fill="#e8cfcf"/>
+        <ellipse cx="44" cy="18" rx="6" ry="16" fill="#e8cfcf"/>
+        <ellipse cx="26" cy="18" rx="3" ry="12" fill="#d4a5a5" opacity="0.3"/>
+        <ellipse cx="44" cy="18" rx="3" ry="12" fill="#d4a5a5" opacity="0.3"/>
+        <circle cx="30" cy="43" r="2" fill="#5a5a5a"/>
+        <circle cx="40" cy="43" r="2" fill="#5a5a5a"/>
+        <ellipse cx="35" cy="48" rx="3" ry="2" fill="#d4a5a5"/>
+        <circle cx="25" cy="48" r="4" fill="#d4a5a5" opacity="0.3"/>
+        <circle cx="45" cy="48" r="4" fill="#d4a5a5" opacity="0.3"/>
+    </g>
+</svg>
+
+<!-- 右侧装饰：小熊 -->
+<svg class="svg-decor decor-middle-right" width="60" height="70" viewBox="0 0 60 70" fill="none">
+    <g opacity="0.4">
+        <ellipse cx="30" cy="55" rx="18" ry="15" fill="#d1e5dc"/>
+        <circle cx="30" cy="32" r="18" fill="#a8c4b8"/>
+        <circle cx="14" cy="18" r="8" fill="#a8c4b8"/>
+        <circle cx="46" cy="18" r="8" fill="#a8c4b8"/>
+        <circle cx="14" cy="18" r="5" fill="#7a9a8a" opacity="0.3"/>
+        <circle cx="46" cy="18" r="5" fill="#7a9a8a" opacity="0.3"/>
+        <circle cx="24" cy="30" r="2.5" fill="#4a4a4a"/>
+        <circle cx="36" cy="30" r="2.5" fill="#4a4a4a"/>
+        <ellipse cx="30" cy="36" rx="4" ry="3" fill="#7a9a8a" opacity="0.5"/>
+        <circle cx="18" cy="35" r="4" fill="#d4a5a5" opacity="0.25"/>
+        <circle cx="42" cy="35" r="4" fill="#d4a5a5" opacity="0.25"/>
+    </g>
+</svg>
+
+<!-- 头部 -->
+<header class="header">
+    <h1><span class="icon">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <rect x="6" y="8" width="24" height="20" rx="3" fill="#8fa4b2" opacity="0.8"/>
+            <rect x="8" y="6" width="20" height="18" rx="2" fill="#b5c6d1"/>
+            <path d="M10 12H26M10 16H22M10 20H18" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="28" cy="26" r="6" fill="#d4a5a5"/>
+            <path d="M25 26L27 28L31 24" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </span>箜箜绘本推荐</h1>
+    <p class="subtitle">专业选书 · 科学育儿 · 培养阅读力</p>
+    <div class="header-stats">
+        <div class="stat-item">
+            <span class="stat-number">30</span>
+            <span class="stat-label">精选绘本</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">6</span>
+            <span class="stat-label">能力维度</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">0-12</span>
+            <span class="stat-label">岁年龄覆盖</span>
+        </div>
+    </div>
+</header>
+
+<!-- 主内容区 -->
+<div class="container">
+    <!-- 搜索栏 -->
+    <div class="search-section">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="搜索绘本名称、作者或育儿问题...">
+            <button onclick="searchBooks()">搜 索</button>
+        </div>
+    </div>
+
+    <!-- 筛选区域 -->
+    <div class="filter-section">
+        <div class="filter-title">按年龄筛选</div>
+        <div class="filter-tags" id="ageFilter">
+            <span class="tag active" data-age="all">全部年龄</span>
+            <span class="tag" data-age="0-3">0-3岁</span>
+            <span class="tag" data-age="3-6">3-6岁</span>
+            <span class="tag" data-age="6-12">6-12岁</span>
+        </div>
+        
+        <div class="filter-title" style="margin-top: 22px;">按能力培养筛选</div>
+        <div class="filter-tags" id="problemFilter">
+            <span class="tag active" data-problem="all">全部能力</span>
+            <span class="tag" data-problem="情绪管理">情绪管理</span>
+            <span class="tag" data-problem="习惯养成">习惯养成</span>
+            <span class="tag" data-problem="专注力">专注力</span>
+            <span class="tag" data-problem="社交能力">社交能力</span>
+            <span class="tag" data-problem="想象力">想象力</span>
+            <span class="tag" data-problem="勇气自信">勇气自信</span>
+        </div>
+    </div>
+
+    <!-- 绘本列表 -->
+    <div class="section-header">
+        <div class="section-title">
+            <svg class="icon" viewBox="0 0 28 28" fill="none">
+                <path d="M4 7C4 5.89543 4.89543 5 6 5H22C23.1046 5 24 5.89543 24 7V23C24 24.1046 23.1046 25 22 25H6C4.89543 25 4 24.1046 4 23V7Z" stroke="#8fa4b2" stroke-width="1.5"/>
+                <path d="M8 9H20M8 13H16M8 17H18" stroke="#d4a5a5" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="21" cy="21" r="4" fill="#a8c4b8"/>
+                <path d="M19.5 21L20.5 22L22.5 20" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            精选绘本推荐
+        </div>
+    </div>
+    <div class="book-list" id="bookList"></div>
+</div>
+
+<!-- 详情弹窗 -->
+<div class="modal" id="bookModal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal()">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M6 6L14 14M14 6L6 14" stroke="#5a6570" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </button>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<script>
+// 绘本数据库 - 完整版 (30本精选绘本)
+const booksData = [
+    // ==================== 0-2岁 绘本 ====================
+    {
+        id: 1,
+        title: "好饿的毛毛虫",
+        author: "艾瑞·卡尔 / 明天出版社",
+        age: "0-3岁",
+        badge: "认知启蒙",
+        problems: ["习惯养成", "认知启蒙"],
+        abilities: ["数字认知", "颜色认知", "星期概念", "自然知识"],
+        gradient: "linear-gradient(145deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/好饿的毛毛虫_封面.jpg",
+        desc: "一只刚出生的小毛毛虫，好饿好饿，它吃了好多好多东西，最后变成了一只美丽的蝴蝶。",
+        pros: [
+            "洞洞设计激发宝宝好奇心和动手探索欲望",
+            "色彩鲜艳丰富，有效刺激视觉发育",
+            "认知内容全面：数字1-5、星期一到星期天、食物种类",
+            "故事简单有逻辑，帮助建立因果认知",
+            "纸张厚实耐用，适合低幼宝宝反复翻阅"
+        ],
+        cons: [
+            "洞洞部分纸张较薄，需小心维护",
+            "建议家长引导互动，单独阅读效果有限",
+            "部分食物图较大，婴儿可能误认为可食用"
+        ],
+        detail: "这本风靡全球的洞洞书，用一只小毛毛虫的成长故事，带领孩子开启认知之旅。周一吃一个苹果，周二吃两个梨……毛毛虫从虫卵变成大毛毛虫，最后破茧成蝶。配合洞洞设计，孩子可以伸手触摸、探索。阅读这本绘本，不仅能认识数字、颜色、星期，还能了解毛毛虫的生命周期，感受自然的奇妙。"
+    },
+    {
+        id: 2,
+        title: "猜猜我有多爱你",
+        author: "山姆·麦克布雷尼 / 明天出版社",
+        age: "2-5岁",
+        badge: "亲子情感",
+        problems: ["情绪管理", "亲子关系"],
+        abilities: ["情感表达", "语言表达", "亲子互动"],
+        gradient: "linear-gradient(145deg, #a8c4b8 0%, #d1e5dc 50%, #e8f5e9 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/猜猜我有多爱你_封面.jpg",
+        desc: "小兔子和大兔子比谁爱得多，用各种方式表达爱的故事。全球销量超5000万册的经典之作。",
+        pros: [
+            "温馨治愈，是完美的睡前亲子共读绘本",
+            "教会孩子用语言和动作表达爱意",
+            "画面色调温暖柔和，有助于安抚情绪",
+            "重复句式朗朗上口，便于孩子复述",
+            "结尾令人动容，强化亲子情感联结"
+        ],
+        cons: [
+            "故事节奏较慢，活泼好动的孩子可能坐不住",
+            "更适合情感细腻的孩子",
+            "建议配合拥抱等肢体动作效果更佳"
+        ],
+        detail: "小兔子和大兔子展开了一场爱的比拼。张开手臂说'我爱你有这么多'，大兔子手臂更长；跳得高说'我爱你到月亮那里'，大兔子跳得更高……最后小兔子睡着了，大兔子轻轻说'我爱你，一直到月亮那里，再从月亮回到这里'。这个简单而温暖的故事，让无数家庭在共读中感受爱的力量。"
+    },
+    {
+        id: 3,
+        title: "大卫，不可以",
+        author: "大卫·香农 / 河北教育出版社",
+        age: "2-6岁",
+        badge: "行为引导",
+        problems: ["习惯养成", "行为规范"],
+        abilities: ["规则意识", "自我认知", "亲子关系"],
+        gradient: "linear-gradient(145deg, #f5f3f0 0%, #e8d4a8 50%, #d4c4a8 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/大卫不可以_封面.jpg",
+        desc: "调皮的大卫总是做各种让妈妈头疼的事，妈妈总说'不可以'，但最后还是给他一个大大的拥抱。",
+        pros: [
+            "孩子的代入感极强，仿佛在看自己的日常",
+            "画风夸张幽默，符合儿童审美",
+            "让孩子明白规则的重要性",
+            "结尾传递无条件的爱，消除对'被禁止'的恐惧",
+            "引导孩子区分'行为'和'人'"
+        ],
+        cons: [
+            "部分家长担心孩子模仿大卫的调皮行为",
+            "无字书形式，依赖图画讲述",
+            "需要家长正确引导，避免只关注'不可以'"
+        ],
+        detail: "大卫是个让妈妈头疼的小男孩——站在椅子上够饼干、在家里玩棒球、浑身是泥跑进门……每一页都是'不可以'的场景。但无论大卫多么调皮，最后一页妈妈总会抱住他说'大卫，我爱你'。这本书让孩子明白，即使做了错事，爸爸妈妈的爱永远不会改变。"
+    },
+    {
+        id: 4,
+        title: "爷爷一定有办法",
+        author: "菲比·吉尔曼 / 明天出版社",
+        age: "3-6岁",
+        badge: "温暖故事",
+        problems: ["想象力", "亲子关系"],
+        abilities: ["创造力", "观察力", "感恩教育"],
+        gradient: "linear-gradient(145deg, #8fa4b2 0%, #b5c6d1 50%, #d4dde3 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/爷爷一定有办法_封面.jpg",
+        desc: "爷爷把旧毯子改成外套，外套改成背心……每次都说'一定有办法'，充满智慧与温情。",
+        pros: [
+            "故事温馨，体现祖孙之间的深厚感情",
+            "画面细节极其丰富，值得反复观察",
+            "教会孩子珍惜物品、环保意识",
+            "传递'办法总比困难多'的积极态度",
+            "画面下方隐藏老鼠一家的故事线，增加探索乐趣"
+        ],
+        cons: [
+            "故事节奏较慢，活泼好动的孩子可能坐不住",
+            "画面偏小，需要近距离观看",
+            "单本价格较高"
+        ],
+        detail: "约瑟还小的时候，爷爷为他缝了一条神奇的毯子。随着约瑟长大，毯子旧了，妈妈说扔掉吧。但爷爷总有办法——改成外套、背心、领带、手帕、纽扣……直到纽扣也丢了，约瑟拿起笔，写下了这个温暖的故事。每一页下方，还有老鼠一家用边角料装饰房间的温馨画面。"
+    },
+    {
+        id: 5,
+        title: "鳄鱼怕怕牙医怕怕",
+        author: "五味太郎 / 少年儿童出版社",
+        age: "2-5岁",
+        badge: "健康习惯",
+        problems: ["习惯养成"],
+        abilities: ["健康意识", "换位思考", "勇气培养"],
+        gradient: "linear-gradient(145deg, #a8e6cf 0%, #88d8b0 50%, #79d2a6 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/鳄鱼怕怕牙医怕怕_封面.jpg",
+        desc: "鳄鱼不想看牙，牙医也不想看鳄鱼，他们都很害怕，但还是勇敢地完成了治疗。",
+        pros: [
+            "幽默风趣的故事情节让孩子哈哈大笑",
+            "有效帮助孩子克服看牙医的恐惧",
+            "双线叙事教会孩子换位思考",
+            "文字简单重复，适合语言启蒙",
+            "让孩子明白面对害怕的事情需要勇气"
+        ],
+        cons: [
+            "故事较短，单本性价比不高",
+            "内容相对单一",
+            "部分孩子可能对牙医场景仍有恐惧"
+        ],
+        detail: "鳄鱼牙疼，不得不去看牙医。他好害怕，牙医也好害怕——鳄鱼会咬人！两个角色说着几乎一模一样的台词，形成有趣的双线叙事。'我好害怕'、'我一定要勇敢'……最后治疗结束，鳄鱼说'我明年还要来看牙'，牙医说'我明年还要看到你'。一本让孩子笑着面对看牙的书。"
+    },
+    {
+        id: 6,
+        title: "母鸡萝丝去散步",
+        author: "佩特·哈群斯 / 少年儿童出版社",
+        age: "2-5岁",
+        badge: "观察力培养",
+        problems: ["专注力"],
+        abilities: ["观察力", "幽默感", "语言表达"],
+        gradient: "linear-gradient(145deg, #f7dc6f 0%, #f4d03f 50%, #e9c52f 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/母鸡萝丝去散步_封面.jpg",
+        desc: "母鸡萝丝淡定地去散步，完全不知道身后有一只狐狸在追她，而狐狸每次都倒霉收场。",
+        pros: [
+            "经典无字书，培养孩子观察力和想象力",
+            "画面幽默有趣，孩子百看不厌",
+            "孩子可以自己讲故事",
+            "发现画面细节的过程充满成就感",
+            "文图形成有趣的反差萌"
+        ],
+        cons: [
+            "文字极少，需要家长引导讲述",
+            "画风偏写实，不是所有孩子都喜欢",
+            "需要家长有讲故事的能力"
+        ],
+        detail: "母鸡萝丝出门去散步，她走过院子、绕过池塘、越过干草堆、经过磨坊、穿过篱笆、钻过蜜蜂房……每一步都很优雅。而她身后，狐狸可惨了——被钉耙打到头、掉进池塘、埋进干草堆、被面粉砸中、被蜜蜂追着跑……萝丝始终一无所知，最后按时回家吃晚饭。"
+    },
+    {
+        id: 7,
+        title: "小黑鱼",
+        author: "李欧·李奥尼 / 南海出版公司",
+        age: "3-6岁",
+        badge: "勇气智慧",
+        problems: ["勇气自信", "社交能力"],
+        abilities: ["团队协作", "自信心", "解决问题"],
+        gradient: "linear-gradient(145deg, #667eea 0%, #764ba2 50%, #8b5fbf 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/小黑鱼_封面.jpg",
+        desc: "一条小黑鱼想办法带领小红鱼们躲避大鱼的追捕，用智慧保护了大家。",
+        pros: [
+            "水彩画风格独特，是审美培养的好教材",
+            "故事有深度，适合多次阅读每次有新发现",
+            "传递团队协作和智慧的力量",
+            "让孩子明白'与众不同'也可以很棒",
+            "启发孩子遇到困难动脑筋想办法"
+        ],
+        cons: [
+            "文字偏多，低龄孩子可能坐不住",
+            "故事节奏较慢",
+            "主题较深，需要家长适当引导理解"
+        ],
+        detail: "大海里住着一群小红鱼和一条小黑鱼。一天，大鱼吃掉了所有小红鱼，只有小黑鱼逃走了。他独自游历大海，见识了水母、海藻、龙虾……最后，他想到一个办法：让所有小红鱼游在一起，组成一条'超级大鱼'，吓跑了大鱼。小黑鱼用智慧保护了大家，也找回了自信。"
+    },
+    {
+        id: 8,
+        title: "我爸爸",
+        author: "安东尼·布朗 / 河北教育出版社",
+        age: "2-6岁",
+        badge: "亲子情感",
+        problems: ["亲子关系", "勇气自信"],
+        abilities: ["情感表达", "语言表达", "自信心"],
+        gradient: "linear-gradient(145deg, #d4a5a5 0%, #e8cfcf 50%, #f5e6e6 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/我爸爸_封面.jpg",
+        desc: "孩子用夸张的比喻描述自己的爸爸——像马一样能吃、像鱼一样游得快，像猩猩一样强壮……",
+        pros: [
+            "温馨感人，适合父亲节礼物",
+            "画风独特，隐藏很多有趣细节",
+            "帮助孩子建立对父亲的认同感",
+            "夸张比喻激发孩子想象力",
+            "结尾温暖，强化亲子情感"
+        ],
+        cons: [
+            "适合爸爸陪伴较多的家庭",
+            "部分比喻较为夸张",
+            "画风可能需要适应"
+        ],
+        detail: "'我爸爸吃得像马一样多，游得像鱼一样快，他像大猩猩一样强壮，也像河马一样快乐……'孩子用各种夸张的比喻描述自己了不起的爸爸。仔细看，每一页都藏着太阳——爸爸的睡衣上、汤碗里、云朵中……最后，孩子说'我爱他，而且你知道吗？他也爱我，永远爱我！'"
+    },
+    {
+        id: 9,
+        title: "逃家小兔",
+        author: "玛格丽特·怀兹·布朗 / 明天出版社",
+        age: "2-5岁",
+        badge: "安全感培养",
+        problems: ["情绪管理", "亲子关系"],
+        abilities: ["安全感", "情感表达", "语言表达"],
+        gradient: "linear-gradient(145deg, #c9b1ff 0%, #b39ddb 50%, #9575cd 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/逃家小兔_封面.jpg",
+        desc: "小兔子说要离家出走，兔妈妈说不管你去哪里，我都会找到你。穿越时空的母子之爱。",
+        pros: [
+            "经典绘本，获奖无数",
+            "传递无条件的爱和安全感",
+            "对话形式适合互动阅读",
+            "故事充满想象力和童趣",
+            "帮助孩子建立安全感"
+        ],
+        cons: [
+            "故事简单，有人觉得平淡",
+            "画风偏古典，可能不是所有孩子都喜欢",
+            "需要安静的共读环境"
+        ],
+        detail: "小兔子对妈妈说'我要跑走啦！'妈妈温柔地回答'如果你跑走了，我就去追你，因为你是我的小宝贝呀！'小兔子变成石头、变成小花、变成小鸟……兔妈妈就变成找石头的人、浇花的人、变成风……这是一场爱的追逐游戏，最后小兔子知道，妈妈的爱永远跟随着自己。"
+    },
+    {
+        id: 10,
+        title: "不一样的卡梅拉",
+        author: "克利斯提昂·约里波瓦 / 二十一世纪出版社",
+        age: "3-6岁",
+        badge: "梦想冒险",
+        problems: ["勇气自信", "想象力"],
+        abilities: ["独立思考", "勇气培养", "梦想追求"],
+        gradient: "linear-gradient(145deg, #ff6b6b 0%, #ee5a5a 50%, #dd4949 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/不一样的卡梅拉_封面.jpg",
+        desc: "一只不想下蛋的小鸡，想要去看大海，历经冒险最终实现梦想。",
+        pros: [
+            "故事情节精彩，孩子百听不厌",
+            "传递追求梦想的勇气和力量",
+            "系列书籍，持续阅读保持兴趣",
+            "角色性格鲜明，易于记住",
+            "冒险故事激发探索精神"
+        ],
+        cons: [
+            "文字较多，单次阅读时间长",
+            "部分家长觉得内容偏多",
+            "建议分章节阅读"
+        ],
+        detail: "小鸡卡梅拉不想像其他小鸡一样每天下蛋，她觉得'下蛋，下蛋，总是下蛋！生活还有别的可能吗？'她想要去看大海。真的出发了！经历了狂风暴雨、被海盗抓住、被哥伦布救下……最后，她真的看到了大海，还在海滩上遇到了小皮迪克。系列故事每本都是新冒险。"
+    },
+    {
+        id: 11,
+        title: "神奇校车",
+        author: "乔安娜·柯尔 / 贵州人民出版社",
+        age: "6-12岁",
+        badge: "科学启蒙",
+        problems: ["专注力", "知识学习"],
+        abilities: ["科学启蒙", "探索精神", "知识积累"],
+        gradient: "linear-gradient(145deg, #4ecdc4 0%, #44a3a0 50%, #3d9591 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/神奇校车_封面.jpg",
+        desc: "卷毛老师开着神奇校车，带孩子们进入人体、太空、海洋等奇妙世界探险。",
+        pros: [
+            "科普知识丰富且有趣",
+            "故事情节引人入胜",
+            "系列覆盖多个科学领域",
+            "图文并茂易于理解",
+            "培养探索精神和科学思维"
+        ],
+        cons: [
+            "文字量较大，适合有一定阅读基础的孩子",
+            "知识点密集，需要反复阅读消化",
+            "建议配合实验加深理解"
+        ],
+        detail: "卷毛老师的校车可神奇了！它能变成宇宙飞船飞向太空，变成潜水艇潜入海洋，缩小后钻进人体……每一本书都是一次惊险的科学之旅。跟着卷毛老师和同学们，一起探索地球内部、天气变化、人体奥秘……在故事中轻松学到科学知识！"
+    },
+    {
+        id: 12,
+        title: "活了100万次的猫",
+        author: "佐野洋子 / 接力出版社",
+        age: "6-12岁",
+        badge: "生命教育",
+        problems: ["情绪管理", "生命教育"],
+        abilities: ["情感理解", "生命认知", "爱的能力"],
+        gradient: "linear-gradient(145deg, #2c3e50 0%, #34495e 50%, #3d566e 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/活了100万次的猫_封面.jpg",
+        desc: "一只活了100万次的猫，从未哭过，直到它遇见了一只白猫，第一次懂得了什么是爱。",
+        pros: [
+            "深刻感人，适合亲子共读讨论",
+            "探讨爱与生命的深层意义",
+            "画面简洁有力量",
+            "引发对生命价值的思考",
+            "适合反复阅读，每次有不同感悟"
+        ],
+        cons: [
+            "主题较深，低龄孩子可能不理解",
+            "部分读者觉得结局悲伤",
+            "建议家长先阅读做功课"
+        ],
+        detail: "有一只虎斑猫，它活了100万次。它属于国王、水手、魔术师……有100万个人爱过它，但它从没哭过。直到有一天，它变成了一只野猫，遇到了一只白猫。白猫不让它看自己，每天坐在它身边。虎斑猫第一次爱了，第一次哭了100万次……当白猫死去，猫抱着它哭了一天，然后永远闭上了眼睛。"
+    },
+    // ==================== 新增绘本（13-25）====================
+    {
+        id: 13,
+        title: "晚安，月亮",
+        author: "玛格丽特·怀兹·布朗 / 北京联合出版公司",
+        age: "0-2岁",
+        badge: "睡前故事",
+        problems: ["睡眠问题", "认知启蒙"],
+        abilities: ["语言感知", "观察力", "睡前仪式"],
+        gradient: "linear-gradient(145deg, #2d5016 0%, #4a7c23 50%, #6b9b3f 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/晚安月亮_封面.jpg",
+        desc: "在绿色的大房间里，小兔子向房间里的每一样东西道晚安，是完美的睡前图画书。",
+        pros: [
+            "经典的睡前故事，帮助建立睡眠仪式",
+            "文字韵律优美，朗朗上口",
+            "画面温馨，色彩柔和不刺激",
+            "培养孩子对日常物品的关注",
+            "让孩子学会说晚安"
+        ],
+        cons: [
+            "部分孩子可能对绿色房间色调不感兴趣",
+            "故事节奏较慢",
+            "更适合低龄婴幼儿"
+        ],
+        detail: "在绿色的大房间里，小兔子躺在床上准备睡觉。'晚安，房间。晚安，月亮。'他向墙上的画、地上的手套、穿过窗户的气球一一道晚安……数着画面里的小物件，和孩子一起轻声说晚安，是无数美国家庭的睡前仪式。这本看似简单的书，是几代孩子的睡眠守护者。"
+    },
+    {
+        id: 14,
+        title: "猜猜我是谁",
+        author: "尼娜·兰登 / 未来出版社",
+        age: "0-2岁",
+        badge: "认知启蒙",
+        problems: ["认知启蒙"],
+        abilities: ["观察力", "动物认知", "想象能力"],
+        gradient: "linear-gradient(145deg, #ffecd2 0%, #fcb69f 50%, #f8a485 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/猜猜我是谁_封面.jpg",
+        desc: "透过小洞猜猜看下一页是什么，锻炼宝宝观察力和想象力的经典洞洞书。",
+        pros: [
+            "互动性强，激发好奇心",
+            "硬纸板书设计，耐撕耐用",
+            "每页小洞锻炼精细动作",
+            "最后一页有小镜子，增加惊喜感",
+            "尺寸小巧，适合宝宝抓握"
+        ],
+        cons: [
+            "系列多，容易买重",
+            "部分家长觉得内容较简单",
+            "适合年龄段较短"
+        ],
+        detail: "从一个小洞开始，引导孩子猜测下一页是什么。'猜猜我是谁？'翻页后是动物妈妈和宝宝。躲猫猫的设计让宝宝参与其中，最后一页还有一面小镜子——'这是谁？原来是宝宝！'宝宝看到自己的脸，总会咯咯笑起来。连续14年雄踞美亚童书榜。"
+    },
+    {
+        id: 15,
+        title: "脸，脸，各种各样的脸",
+        author: "柳原良平 / 少年儿童出版社",
+        age: "0-2岁",
+        badge: "情绪认知",
+        problems: ["情绪认知"],
+        abilities: ["情绪识别", "表情理解", "社交能力"],
+        gradient: "linear-gradient(145deg, #fdcbf1 0%, #e6dee9 50%, #d4c4d9 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/脸脸各种各样的脸_封面.jpg",
+        desc: "帮助小宝宝认识不同表情的脸，学习识别基本情绪的经典婴儿图画书。",
+        pros: [
+            "专为婴儿设计的情绪认知书",
+            "画面简洁，色彩明快",
+            "每页只有一个表情，易于识别",
+            "可配合表情表演，增强互动",
+            "圆角厚纸板，安全耐撕"
+        ],
+        cons: [
+            "内容相对简单",
+            "适合年龄段较短",
+            "需要家长配合表演表情"
+        ],
+        detail: "脸上有两只眼睛、一个鼻子，还有一张嘴。生气的脸，伤心的脸，开心的脸，睡着的脸……这本简单可爱的书，用最直接的方式帮助婴儿认识脸部的各个部分，以及不同的表情变化。读完后可以和宝宝一起做表情游戏！"
+    },
+    {
+        id: 16,
+        title: "小熊宝宝绘本（全15册）",
+        author: "佐佐木洋子 / 连环画出版社",
+        age: "0-3岁",
+        badge: "习惯养成",
+        problems: ["习惯养成", "社交能力"],
+        abilities: ["生活习惯", "社交礼仪", "情绪认知"],
+        gradient: "linear-gradient(145deg, #d4a574 0%, #c49a6c 50%, #b8916a 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/小熊宝宝绘本_封面.jpg",
+        desc: "涵盖吃饭、睡觉、洗澡、刷牙、打招呼、交朋友等日常生活的15本习惯养成绘本。",
+        pros: [
+            "主题覆盖宝宝生活的方方面面",
+            "画风萌趣可爱，角色讨喜",
+            "文字简短重复，适合婴儿",
+            "薄纸板圆角设计，安全舒适",
+            "每本一个主题，便于针对性阅读"
+        ],
+        cons: [
+            "全套15册较多",
+            "价格相对较高",
+            "文字极少，需要家长扩展讲述"
+        ],
+        detail: "小熊、小兔子、小猪、小老鼠……一群可爱的小动物，演绎着宝宝的日常生活。《你好》《拉臭臭》《午饭》《睡觉》《刷牙》《洗澡》《排队》《散步》《过生日》《好朋友》《大声回答》《尿床了》《谁哭了》《收起来》……每本书都是宝宝会遇到的场景，潜移默化中学会好习惯。"
+    },
+    {
+        id: 17,
+        title: "棕色的熊，棕色的熊，你在看什么？",
+        author: "比尔·马丁 Jr. / 明天出版社",
+        age: "0-3岁",
+        badge: "语言启蒙",
+        problems: ["认知启蒙", "语言启蒙"],
+        abilities: ["动物认知", "颜色认知", "语言节奏"],
+        gradient: "linear-gradient(145deg, #8B4513 0%, #A0522D 50%, #CD853F 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/棕色的熊你在看什么_封面.jpg",
+        desc: "'棕色的熊，棕色的熊，你在看什么？我看见一只红色的鸟在看我……'一问一答的韵律绘本。",
+        pros: [
+            "一问一答形式，增强互动感",
+            "节奏韵律强，朗朗上口",
+            "色彩饱满，刺激视觉发育",
+            "动物和颜色认知一举两得",
+            "艾瑞·卡尔独特的拼贴画风格"
+        ],
+        cons: [
+            "需要按顺序阅读才能理解",
+            "动物和颜色种类较多",
+            "建议配合动作表演"
+        ],
+        detail: "棕色的熊看见红色的鸟，红色的鸟看见蓝色的马……一问一答，串起9种动物和9种颜色。最后老师看见一群可爱的孩子，孩子们看见……一本读完会唱的书！配合动作表演，效果更佳。是廖彩杏书单推荐的经典英文启蒙绘本。"
+    },
+    {
+        id: 18,
+        title: "蹦！",
+        author: "松冈达英 / 二十一世纪出版社",
+        age: "0-2岁",
+        badge: "语言启蒙",
+        problems: ["语言启蒙"],
+        abilities: ["语言感知", "肢体模仿", "动物认知"],
+        gradient: "linear-gradient(145deg, #f9f9f9 0%, #e8e8e8 50%, #d8d8d8 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/蹦_封面.jpg",
+        desc: "'Beng！'一个拟声词，让宝宝咯咯笑的绘本。跟着小动物们一起蹦起来！",
+        pros: [
+            "简单有趣，低幼宝宝超爱",
+            "拟声词'蹦'魔性洗脑",
+            "可配合肢体动作阅读",
+            "动物形象可爱",
+            "培养阅读兴趣的好起点"
+        ],
+        cons: [
+            "内容极简，适合年龄段短",
+            "需要家长夸张表演",
+            "大孩子可能觉得幼稚"
+        ],
+        detail: "母鸡'Beng'！小鱼'Beng'？小鱼不会蹦……蜗牛'Beng'？也不会！青虫'Beng'？还是不会！'Beng'这个奇妙的音，让宝宝咯咯笑。跟着书里的动物一起蹦，是无数宝宝的快乐时光。简单的书，大大的欢乐！"
+    },
+    {
+        id: 19,
+        title: "我的情绪小怪兽",
+        author: "安娜·耶纳斯 / 陕西人民教育出版社",
+        age: "3-6岁",
+        badge: "情绪管理",
+        problems: ["情绪管理"],
+        abilities: ["情绪认知", "情绪表达", "心理调节"],
+        gradient: "linear-gradient(145deg, #ff6b6b 0%, #ffd93d 50%, #6bcb77 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/我的情绪小怪兽_封面.jpg",
+        desc: "用不同颜色的小怪兽代表不同情绪，帮助孩子认识和理解自己的内心感受。",
+        pros: [
+            "创新性地用颜色表达情绪",
+            "立体翻翻页设计，增加互动",
+            "画面色彩心理学运用出色",
+            "帮助孩子识别和命名情绪",
+            "学会整理和调节情绪"
+        ],
+        cons: [
+            "立体书容易损坏",
+            "部分抽象情绪仍需家长解释",
+            "适合有语言基础的孩子"
+        ],
+        detail: "小怪兽感觉乱糟糟的，因为它把所有的情绪混在一起了！快乐是黄色的，悲伤是蓝色的，生气是红色的，恐惧是黑色的，平静是绿色的……小女孩帮小怪兽把情绪分类装进不同的瓶子里。读完这本书，孩子学会说'我现在很生气'而不是只会哭闹。"
+    },
+    {
+        id: 20,
+        title: "菲菲生气了",
+        author: "莫莉·卞 / 河北教育出版社",
+        age: "3-6岁",
+        badge: "情绪管理",
+        problems: ["情绪管理"],
+        abilities: ["情绪认知", "情绪调节", "自我控制"],
+        gradient: "linear-gradient(145deg, #c0392b 0%, #e74c3c 50%, #f1948a 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/菲菲生气了_封面.jpg",
+        desc: "菲菲因为和姐姐抢玩具气得像火山爆发，后来她一个人跑到大自然里，慢慢平静下来。",
+        pros: [
+            "用画面直观展示情绪变化过程",
+            "让孩子认识'生气'是正常情绪",
+            "提供情绪调节的方法示例",
+            "画面色彩随情绪变化而变化",
+            "教会孩子独处和自我安抚"
+        ],
+        cons: [
+            "故事涉及负面情绪，需正向引导",
+            "需要家长解释画面含义",
+            "适合共读讨论"
+        ],
+        detail: "菲菲正在玩玩具，姐姐抢走了她的玩具！菲菲气得'砰'地把门关上，'啊——'大叫起来，感觉自己像要爆炸的火山。她跑出家门，来到一棵大树下……看看大海，听听声音……慢慢地，她觉得好多了，回家去了。菲菲的故事告诉孩子：生气是允许的，但需要学会平静下来。"
+    },
+    {
+        id: 21,
+        title: "花格子大象艾玛",
+        author: "大卫·麦基 / 少年儿童出版社",
+        age: "3-6岁",
+        badge: "自我认同",
+        problems: ["自我认同", "社交能力"],
+        abilities: ["自我认知", "接纳差异", "人际交往"],
+        gradient: "linear-gradient(145deg, #e8e8e8 0%, #d0d0d0 50%, #b8b8b8 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/花格子大象艾玛_封面.jpg",
+        desc: "花格子的艾玛在灰色象群中与众不同，但它用幽默和善良赢得了大家的喜爱。",
+        pros: [
+            "鼓励孩子接纳自己的与众不同",
+            "画风明亮温暖，辨识度高",
+            "教会尊重和包容",
+            "幽默感强，孩子喜欢",
+            "系列故事持续有趣"
+        ],
+        cons: [
+            "系列较多，容易买重",
+            "部分故事较简单",
+            "大孩子可能觉得幼稚"
+        ],
+        detail: "象群都是灰色的，只有艾玛是花格子的。'艾玛，艾玛，你好奇怪！'其他大象总这么说。艾玛用计策让自己变成灰色，和大家一样……但游戏结束后，大家把艾玛抛向天空——'艾玛，艾玛，好样的！'原来，每个人都爱这只特别的花格子大象。"
+    },
+    {
+        id: 22,
+        title: "牙齿大街的新鲜事",
+        author: "安娜·鲁斯曼 / 北京科学技术出版社",
+        age: "3-6岁",
+        badge: "习惯养成",
+        problems: ["习惯养成"],
+        abilities: ["健康意识", "自控能力", "科普知识"],
+        gradient: "linear-gradient(145deg, #3498db 0%, #2980b9 50%, #1f618d 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/牙齿大街的新鲜事_封面.jpg",
+        desc: "两个牙虫兄弟在牙齿里建造乐园，专门搞破坏，哈克和迪克的故事。",
+        pros: [
+            "趣味性强，孩子爱听",
+            "让孩子主动爱上刷牙",
+            "科普与故事完美结合",
+            "建立健康生活习惯",
+            "幽默情节缓解看牙恐惧"
+        ],
+        cons: [
+            "画面偏'重口味'",
+            "可能让孩子对牙齿产生恐惧",
+            "需要正向引导"
+        ],
+        detail: "哈克和迪克是两兄弟，住在一颗牙齿里。他们在牙齿里开派对、建游泳池……把牙齿大街变成乐园！直到牙刷警察来了，把他们都冲走……再不注意口腔卫生，牙齿大街就要变成龋齿大街了！看完这本书，孩子会说'我要好好刷牙，不让哈克和迪克住进来！'"
+    },
+    {
+        id: 23,
+        title: "云朵面包",
+        author: "白希那 / 接力出版社",
+        age: "3-6岁",
+        badge: "想象力",
+        problems: ["想象力", "亲子关系"],
+        abilities: ["想象力", "观察力", "家庭温暖"],
+        gradient: "linear-gradient(145deg, #a8d8ea 0%, #89c4e1 50%, #7ab8d9 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/云朵面包_封面.jpg",
+        desc: "下雨天，小猫兄妹把云朵带回家，妈妈把云朵做成了面包，吃了云朵面包竟然飘了起来！",
+        pros: [
+            "混合艺术形式，独特的视觉效果",
+            "激发孩子想象力",
+            "温馨的家庭故事",
+            "画面温馨有爱",
+            "适合雨天阅读的应景绘本"
+        ],
+        cons: [
+            "画面较暗，可能影响视力",
+            "需要一定理解能力",
+            "不适合作为睡前故事"
+        ],
+        detail: "下雨天的早晨，小猫兄弟发现窗外的云挂在树枝上。哥哥把云朵摘下来，带给妈妈。妈妈把云朵做成了面包——吃了云朵面包，人会飘起来！吃了云朵面包的小猫飘到爸爸上班的地方，给没吃早餐的爸爸送去了面包。一本充满想象力的温情绘本。"
+    },
+    {
+        id: 24,
+        title: "跑跑镇",
+        author: "亚东/麦克小奎 / 明天出版社",
+        age: "3-6岁",
+        badge: "想象力",
+        problems: ["想象力"],
+        abilities: ["创造力", "联想能力", "观察力"],
+        gradient: "linear-gradient(145deg, #ff7675 0%, #fd79a8 50%, #e84393 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/跑跑镇_封面.jpg",
+        desc: "'咣'！小猫和小鹰撞在一起，变成了猫头鹰！充满创意的碰撞故事。",
+        pros: [
+            "创意无限，激发创造力",
+            "节奏欢快，适合表演",
+            "每页都是小悬念",
+            "可延伸做创意游戏",
+            "孩子会模仿'碰撞'故事"
+        ],
+        cons: [
+            "内容较简单",
+            "需要配合互动效果更好",
+            "适合年龄段较短"
+        ],
+        detail: "跑跑镇上住着一群爱跑的小动物。'咣'！小猫和小鹰撞在一起，变成了一只猫头鹰！'咣'！苹果和红宝石撞在一起，变成了一颗石榴！'咣'！消防栓和灭火器撞在一起……是什么？每个碰撞都是惊喜！读完后可以和孩子一起想象：还有什么可以碰撞出新东西？"
+    },
+    {
+        id: 25,
+        title: "妈妈，买绿豆！",
+        author: "曾阳晴 / 明天出版社",
+        age: "2-6岁",
+        badge: "亲子生活",
+        problems: ["认知启蒙", "亲子关系"],
+        abilities: ["生活认知", "数学启蒙", "观察能力"],
+        gradient: "linear-gradient(145deg, #55a869 0%, #3d8b4f 50%, #2d7a3f 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/妈妈买绿豆_封面.jpg",
+        desc: "阿宝和妈妈一起去买绿豆、泡绿豆、煮绿豆、做绿豆冰的温馨故事。",
+        pros: [
+            "充满烟火气的中国原创绘本",
+            "画面细节丰富，百看不厌",
+            "自然融入数学概念",
+            "温馨的亲子时光",
+            "激发孩子参与家务的兴趣"
+        ],
+        cons: [
+            "故事较平淡",
+            "需要慢慢品味",
+            "适合亲子共读"
+        ],
+        detail: "阿宝和妈妈去菜市场买绿豆。回家后，泡绿豆、洗绿豆、煮绿豆……'妈妈，绿豆煮开了！''等绿豆凉了可以做绿豆冰！'阿宝不小心打翻了绿豆罐子，妈妈没有生气，只是和他一起捡豆子。绿豆发芽了，变成小小的豆芽。这是一个关于夏天、关于妈妈、关于生活的小故事。"
+    },
+    {
+        id: 26,
+        title: "蚯蚓的日记",
+        author: "朵琳·克罗宁 / 明天出版社",
+        age: "4-8岁",
+        badge: "自然科普",
+        problems: ["认知启蒙", "习惯养成"],
+        abilities: ["自然知识", "日记格式", "幽默感"],
+        gradient: "linear-gradient(145deg, #8B4513 0%, #654321 50%, #4a3728 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/蚯蚓的日记_封面.jpg",
+        desc: "一只小蚯蚓用日记的形式，记录它在学校、家庭和朋友们之间的生活趣事。",
+        pros: [
+            "独特的日记体形式",
+            "幽默有趣，吸引孩子",
+            "自然科普知识融入故事",
+            "培养写日记的习惯",
+            "教会孩子换个角度看世界"
+        ],
+        cons: [
+            "涉及蚯蚓可能部分孩子不喜欢",
+            "需要一定阅读能力",
+            "建议配合自然观察活动"
+        ],
+        detail: "3月20日：今天我表白了蜘蛛，虽然她有八条腿，但我们是好朋友。3月23日：今天爷爷教我们礼貌，碰到蚂蚁要打招呼。5月1日：姐姐第一次被人类踩扁后又爬出来了，这是我们蚯蚓的特异功能！一本让你笑到肚子疼的自然科普书。"
+    },
+    {
+        id: 27,
+        title: "窗边的小豆豆",
+        author: "黑柳彻子 / 南海出版公司",
+        age: "6-12岁",
+        badge: "成长故事",
+        problems: ["成长困惑", "亲子关系"],
+        abilities: ["情商培养", "自信建立", "爱心教育"],
+        gradient: "linear-gradient(145deg, #f39c12 0%, #e67e22 50%, #d35400 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/窗边的小豆豆_封面.jpg",
+        desc: "小豆豆因'问题'被退学，来到巴学园，在小林校长的爱护下快乐成长。",
+        pros: [
+            "温暖人心的成长故事",
+            "传递尊重和爱的教育理念",
+            "让孩子感受上学的快乐",
+            "培养自信心和独立性",
+            "适合亲子共读讨论"
+        ],
+        cons: [
+            "字数较多，需要较长阅读时间",
+            "部分内容需要理解能力",
+            "建议配合相关背景知识"
+        ],
+        detail: "小豆豆是个奇怪的孩子——她会站在窗边和宣传艺人打招呼，会把桌子盖开开关关……所以被退学了。但巴学园不一样！电车教室、'山的味道海的味道'午餐、温泉旅行……在小林校长的爱护下，小豆豆和朋友们快乐地成长着。这本书让无数孩子向往那样的学校。"
+    },
+    {
+        id: 28,
+        title: "小猪唏哩呼噜",
+        author: "孙幼军 / 春风文艺出版社",
+        age: "5-10岁",
+        badge: "桥梁书",
+        problems: ["阅读习惯", "情商培养"],
+        abilities: ["独立阅读", "幽默感", "善良品质"],
+        gradient: "linear-gradient(145deg, #ffb6c1 0%, #ff9a9e 50%, #ff8a8e 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/小猪唏哩呼噜_封面.jpg",
+        desc: "一只善良可爱的小猪，因为吃饭声音大被叫'唏哩呼噜'，他的冒险故事温暖又好笑。",
+        pros: [
+            "中国原创桥梁书经典",
+            "故事情节精彩，吸引孩子",
+            "塑造善良勇敢的主人公",
+            "文字有注音，适合自主阅读",
+            "幽默风趣，孩子爱不释手"
+        ],
+        cons: [
+            "篇幅较长",
+            "部分故事有一定难度",
+            "建议每天阅读几页"
+        ],
+        detail: "小猪'唏哩呼噜'名字的由来是因为他吃饭声音很大。他帮妈妈买橘子被大灰狼抓走，凭智慧脱险；他的小扁牙被月牙熊羡慕；他还当过小猪侠……这只善良、勇敢、有点傻乎乎的小猪，是无数孩子的阅读启蒙书。"
+    },
+    {
+        id: 29,
+        title: "夏洛的网",
+        author: "E.B.怀特 / 上海译文出版社",
+        age: "6-12岁",
+        badge: "生命友谊",
+        problems: ["情感教育", "生命教育"],
+        abilities: ["友谊认知", "生命意识", "情感表达"],
+        gradient: "linear-gradient(145deg, #f5f5f5 0%, #e0e0e0 50%, #d0d0d0 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/夏洛的网_封面.jpg",
+        desc: "小猪威尔伯和蜘蛛夏洛的感人故事——夏洛用蜘蛛网织出文字，救了威尔伯。",
+        pros: [
+            "儿童文学经典中的经典",
+            "关于友谊和生命的深刻故事",
+            "文字优美，适合文学启蒙",
+            "培养孩子的共情能力",
+            "适合反复阅读"
+        ],
+        cons: [
+            "涉及死亡话题，需引导",
+            "文字量较大",
+            "需要一定阅读基础"
+        ],
+        detail: "小猪威尔伯知道了一个可怕的秘密——他将在圣诞节被做成熏肉火腿！就在他绝望的时候，蜘蛛夏洛说：'我救你。'夏洛在蜘蛛网上织出字——'了不起'、'光彩照人'……改变了威尔伯的命运。但夏洛的生命走到了尽头……一个关于友谊、承诺和生命意义的感人故事。"
+    },
+    {
+        id: 30,
+        title: "没头脑和不高兴",
+        author: "任溶溶 / 浙江少年儿童出版社",
+        age: "6-10岁",
+        badge: "习惯养成",
+        problems: ["习惯养成", "情商培养"],
+        abilities: ["自我反省", "习惯养成", "幽默感"],
+        gradient: "linear-gradient(145deg, #9b59b6 0%, #8e44ad 50%, #7d3c98 100%)",
+        coverUrl: "https://cdn.jsdelivr.net/gh/kaidy-kk/kaidy-ck@main/images/没头脑和不高兴_封面.jpg",
+        desc: "'没头脑'做事丢三落四，'不高兴'总说'不高兴'，两个好朋友的有趣故事。",
+        pros: [
+            "中国童话经典",
+            "幽默中蕴含教育意义",
+            "人物性格鲜明易记",
+            "让孩子反省自己的缺点",
+            "短篇故事，适合分段阅读"
+        ],
+        cons: [
+            "部分内容可能年代感",
+            "需要家长适当引导",
+            "适合反复阅读"
+        ],
+        detail: "'没头脑'记性不好，做什么都丢三落四；'不高兴'呢，脾气倔，谁劝都不听。有意思的是，他们小时候的模样和长大后一模一样——'没头脑'成了建筑师，设计了没有电梯的少年宫；'不高兴'成了演员，演武松打虎却真的打起来……故事告诉我们：好习惯要从小养成！"
+    }
+];
+
+// 应用逻辑
+let currentAge = 'all';
+let currentProblem = 'all';
+
+document.addEventListener('DOMContentLoaded', function() {
+    initFilters();
+    renderBooks();
+});
+
+function initFilters() {
+    document.querySelectorAll('#ageFilter .tag').forEach(tag => {
+        tag.addEventListener('click', function() {
+            document.querySelectorAll('#ageFilter .tag').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            currentAge = this.dataset.age;
+            renderBooks();
+        });
+    });
+
+    document.querySelectorAll('#problemFilter .tag').forEach(tag => {
+        tag.addEventListener('click', function() {
+            document.querySelectorAll('#problemFilter .tag').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            currentProblem = this.dataset.problem;
+            renderBooks();
+        });
+    });
+
+    document.getElementById('searchInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') searchBooks();
+    });
+}
+
+function searchBooks() {
+    const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+    if (!keyword) { renderBooks(); return; }
+    const filtered = booksData.filter(book => 
+        book.title.toLowerCase().includes(keyword) ||
+        book.problems.some(p => p.includes(keyword)) ||
+        book.abilities.some(a => a.includes(keyword)) ||
+        book.desc.includes(keyword)
+    );
+    renderBookList(filtered);
+}
+
+function renderBooks() {
+    let filtered = booksData;
+    if (currentAge !== 'all') filtered = filtered.filter(book => book.age.includes(currentAge));
+    if (currentProblem !== 'all') filtered = filtered.filter(book => book.problems.includes(currentProblem));
+    renderBookList(filtered);
+}
+
+function renderBookList(books) {
+    const container = document.getElementById('bookList');
+    if (books.length === 0) {
+        container.innerHTML = `
+        <div class="empty-state">
+            <svg class="icon" viewBox="0 0 80 80" fill="none">
+                <rect x="15" y="15" width="50" height="50" rx="8" stroke="#8fa4b2" stroke-width="2" fill="none"/>
+                <path d="M25 30H55M25 40H45M25 50H50" stroke="#d4a5a5" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="55" cy="55" r="12" fill="#a8c4b8"/>
+                <path d="M50 55L53 58L60 51" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <p>没有找到相关绘本</p>
+        </div>`;
+        return;
+    }
+    container.innerHTML = books.map((book, index) => `
+        <div class="book-card" onclick="openDetail(${book.id})" style="animation-delay: ${index * 0.05}s">
+            <div class="book-cover-wrap">
+                <div class="book-cover" style="${book.coverUrl ? `background-image:url(${book.coverUrl});background-size:cover;background-position:center;` : `background:${book.gradient}`}">${!book.coverUrl ? `
+                    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;width:80%;">
+                        <div style="font-size:14px;font-weight:600;color:rgba(255,255,255,0.95);text-shadow:0 1px 3px rgba(0,0,0,0.3);line-height:1.4;">${book.title}</div>
+                    </div>` : ''}</div>
+                <span class="book-badge">${book.badge}</span>
+            </div>
+            <div class="book-info">
+                <div class="book-title">${book.title}</div>
+                <div class="book-meta">
+                    <span class="book-tag">${book.age}</span>
+                    <span class="book-tag">${book.problems[0]}</span>
+                </div>
+                <div class="book-desc">${book.desc}</div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function openDetail(id) {
+    const book = booksData.find(b => b.id === id);
+    if (!book) return;
+
+    document.getElementById('modalBody').innerHTML = `
+        <div class="detail-header">
+            <div class="detail-cover-wrap">
+                <div class="detail-cover" style="${book.coverUrl ? `background-image:url(${book.coverUrl});background-size:cover;background-position:center;` : `background:${book.gradient}`}">${!book.coverUrl ? `
+                    <div style="text-align:center; padding:20px;">
+                        <div style="font-size:16px;font-weight:600;color:rgba(255,255,255,0.95);text-shadow:0 1px 3px rgba(0,0,0,0.3);line-height:1.5;">${book.title}</div>
+                    </div>` : ''}</div>
+            </div>
+            <div class="detail-info">
+                <div class="detail-title">${book.title}</div>
+                <div class="detail-author">${book.author}</div>
+                <div class="detail-tags">
+                    <span class="detail-tag">${book.age}</span>
+                    ${book.problems.map(p => `<span class="detail-tag">${p}</span>`).join('')}
+                </div>
+            </div>
+        </div>
+        <div class="detail-content">
+            <div class="detail-section">
+                <h3>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <rect x="3" y="3" width="14" height="14" rx="2" stroke="#d4a5a5" stroke-width="1.5"/>
+                        <path d="M6 7H14M6 10H11M6 13H12" stroke="#8fa4b2" stroke-width="1.2" stroke-linecap="round"/>
+                    </svg>
+                    绘本简介
+                </h3>
+                <p>${book.detail}</p>
+            </div>
+            <div class="detail-section">
+                <h3>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <circle cx="10" cy="10" r="7" stroke="#a8c4b8" stroke-width="1.5"/>
+                        <path d="M10 6V10L13 13" stroke="#5a8a6a" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    能力培养
+                </h3>
+                <div class="ability-tags">
+                    ${book.abilities.map(a => `<span class="ability-tag">${a}</span>`).join('')}
+                </div>
+            </div>
+            <div class="detail-section">
+                <h3>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 2L12 7H17L13 10L15 16L10 12L5 16L7 10L3 7H8L10 2Z" stroke="#e8d4a8" stroke-width="1.5" stroke-linejoin="round"/>
+                    </svg>
+                    优缺点分析
+                </h3>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <circle cx="8" cy="8" r="6" stroke="#5a8a6a" stroke-width="1.5"/>
+                                <path d="M5 8L7 10L11 6" stroke="#5a8a6a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            优点
+                        </h4>
+                        <ul>${book.pros.map(p => `<li>${p}</li>`).join('')}</ul>
+                    </div>
+                    <div class="cons">
+                        <h4>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <circle cx="8" cy="8" r="6" stroke="#b08888" stroke-width="1.5"/>
+                                <path d="M6 6L10 10M10 6L6 10" stroke="#b08888" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                            注意事项
+                        </h4>
+                        <ul>${book.cons.map(c => `<li>${c}</li>`).join('')}</ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('bookModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('bookModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+document.getElementById('bookModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+});
+</script>
+
+</body>
+</html>
